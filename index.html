@@ -95,7 +95,7 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
-    import { collection, query, where, onSnapshot, getDocs, doc, setDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+    import { collection, query, where, onSnapshot, getDocs, doc, setDoc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
@@ -112,11 +112,14 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    // initializeFirestore(app, {localCache: memoryLocalCache()});
 
     const querySnapshot = await getDocs(collection(db, "contacts"));
     querySnapshot.forEach((doc) => {
   console.log(`${doc.id} => ${doc.data().name}`);
 });
+
+
 
 // const docRef = await addDoc(collection(db, "contacts"), {
 //   name: "Tokyo",
@@ -169,7 +172,9 @@ contactContainer.addEventListener('click', evt => {
     console.log(evt);
     if(evt.target.tagName === 'I' ){
         const id = evt.target.getAttribute('data-id');
-        db.collection('contacts').doc(id).delete();
+        deleteDoc(doc(db, "contacts", id));
+
+        // db.collection('contacts').doc(id).delete();
     }
 })
 

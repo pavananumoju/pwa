@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //renderContact
 const renderContact = (data, id) => {
-  const html = `    <div class="grey-text text-darken-1 pk-contact">
+  const html = `    <div class="grey-text text-darken-1 pk-contact" data-id="${id}">
     <div class="contact-image">
       <img src="img/pkcontacts.png" alt="contact thumb">
     </div>
@@ -23,9 +23,16 @@ const renderContact = (data, id) => {
       <i class="material-icons">call</i>              
       <i class="material-icons" data-id="${id}">delete_outline</i>              
     </div>
-  </div>
 </div>`;
 
 contacts.innerHTML += html;
 
+}
+
+
+//removeContact
+
+const removeContact = (id) => {
+  const contact = document.querySelector(`.pk-contact[data-id=${id}]`);
+  contact.remove();
 }
