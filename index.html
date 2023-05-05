@@ -9,7 +9,12 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" href="css/styles.css" rel="stylesheet">
   <script type="text/javascript" src="js/materialize.min.js"></script>
-  
+  <link rel="manifest" href="manifest.json">
+  <!-- ios support-->
+<link rel="apple-touch-icon" href="icons/icon-96.png">
+<meta name="apple-mobile-web-app-status-bar" content="#00695c">
+<meta name="theme-color" content="#00695c">
+  <!-- ios support-->
 </head>
 <body class="teal lighten-5">
 
@@ -43,7 +48,10 @@
         <i class="material-icons">delete_outline</i>              
       </div>
     </div>     -->
-    <div class="grey-text text-darken-1 pk-contact">
+
+<!-- <h4>Contacts - NEW - 1</h4> -->
+
+    <!-- <div class="grey-text text-darken-1 pk-contact">
       <div class="contact-image">
         <img src="img/pkcontacts.png" alt="contact thumb">
       </div>
@@ -55,7 +63,7 @@
         <i class="material-icons">call</i>              
         <i class="material-icons">delete_outline</i>              
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="center">
@@ -70,8 +78,8 @@
       <h6 >New Contact</h6>
       <div class="divider"></div>
       <div class="input-field">
-        <input placeholder="e.g. John Doe" id="title" type="text" class="validate">
-        <label for="title">Contact Name</label>
+        <input placeholder="e.g. John Doe" id="name" type="text" class="validate">
+        <label for="name">Contact Name</label>
       </div>
       <div class="input-field">
         <input placeholder="e.g. +198392323" id="numbers" type="text" class="validate">
@@ -83,6 +91,95 @@
     </form>
   </div>
 
-  <script src="js/common.js"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+    import { collection, query, where, onSnapshot, getDocs, doc, setDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFT8UOJmIPOof8urDZ3ymADFav8l7N5YM",
+      authDomain: "contacts-db-2dcb5.firebaseapp.com",
+      projectId: "contacts-db-2dcb5",
+      storageBucket: "contacts-db-2dcb5.appspot.com",
+      messagingSenderId: "124645324248",
+      appId: "1:124645324248:web:3e791eb07d1efba3c66ead"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const querySnapshot = await getDocs(collection(db, "contacts"));
+    querySnapshot.forEach((doc) => {
+  console.log(`${doc.id} => ${doc.data().name}`);
+});
+
+// const docRef = await addDoc(collection(db, "contacts"), {
+//   name: "Tokyo",
+//   number: "123454"
+// });
+
+
+//realtime listener
+const q = query(collection(db, "contacts"));
+const unsubscribe = onSnapshot(q, (snapshot) => {
+    snapshot.docChanges().forEach(change => {
+        if(change.type === 'added'){
+            renderContact(change.doc.data(), change.doc.id);
+        }
+
+        if(change.type === 'removed'){
+            removeContact(change.doc.id);
+        }
+    })
+})
+
+
+
+
+//add new contact
+const form = document.querySelector('form');
+form.addEventListener('submit', evt => {
+    evt.preventDefault();
+    const contact = {
+        name: form.name.value,
+        number: form.numbers.value
+    };
+
+    // db.collection('contacts').add(contact)
+    // .catch(err => {
+    //     console.log(err);
+    // })
+
+    const docRef = addDoc(collection(db, "contacts"), contact);
+
+    form.name.value = '';
+    form.numbers.value = '';
+
+})
+
+
+//delete a contact
+const contactContainer = document.querySelector('.contacts');
+contactContainer.addEventListener('click', evt => {
+    console.log(evt);
+    if(evt.target.tagName === 'I' ){
+        const id = evt.target.getAttribute('data-id');
+        db.collection('contacts').doc(id).delete();
+    }
+})
+
+  </script>
+
+
+
+  <!-- <script type="text/javascript" src="js/db.js" defer></script> -->
+  <script type="text/javascript" src="js/app.js" defer></script>
+  
+  <script type="text/javascript" src="js/common.js"></script>
 </body>
 </html>
