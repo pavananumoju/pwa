@@ -1,7 +1,7 @@
 // console.log('Service worker inside sw.js');
 
 const cacheName = "app-shell-rsrs-v2";
-const dynamicCacheName = "dynamic-cache-v5"
+const dynamicCacheName = "dynamic-cache-v1"
 const assets = [
     '/',
     'index.html',
