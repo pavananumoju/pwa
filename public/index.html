@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,16 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" href="css/styles.css" rel="stylesheet">
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="module" src="js/firebaseint.js"></script>
+  <script src="js/app.js" defer></script>
+  <script type="module" src="js/db.js" defer></script>
   <link rel="manifest" href="manifest.json">
   <!-- ios support -->
   <link rel="apple-touch-icon" href="img/icons/icon-96x96.png">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
 </head>
+
 <body class="grey lighten-4">
 
   <!-- top nav -->
@@ -33,16 +38,18 @@
     <li><a href="index.html" class="waves-effect">Home</a></li>
     <li><a href="pages/rules.html" class="waves-effect">Rules</a></li>
     <li><a href="pages/about.html" class="waves-effect">About</a></li>
-    <li><div class="divider"></div></li>
+    <li>
+      <div class="divider"></div>
+    </li>
     <li><a href="pages/contact.html" class="waves-effect">
-      <i class="material-icons">mail_outline</i>Contact</a>
+        <i class="material-icons">mail_outline</i>Contact</a>
     </li>
   </ul>
 
   <!-- recipes -->
   <div id="loggedinuser"></div>
   <div class="recipes container grey-text text-darken-1">
-    
+
   </div>
 
   <div class="center">
@@ -56,31 +63,37 @@
   <!-- add recipe side nav -->
   <div id="side-form" class="sidenav side-form">
     <form class="add-recipe container section">
-      <h6 >New Recipe</h6>
+      <h6>Add your Player</h6>
       <div class="divider"></div>
       <div class="input-field">
-        <input placeholder="player-1" id="player_1" type="text" class="validate">
+        <input placeholder="player-1" title="Please enter only letters" pattern="[A-Za-z]+" id="player_1" type="text"
+          class="validate">
         <label for="player_1">Player-1</label>
+        <span id="player_1_error" style="color:red;">Please enter a valid name</span>
       </div>
       <div class="input-field">
-        <input placeholder="player-2" id="player_2" type="text" class="validate">
+        <input placeholder="player-2" title="Please enter only letters" pattern="[A-Za-z]+" id="player_2" type="text"
+          class="validate">
         <label for="player_2">player-2</label>
+        <span id="player_2_error" style="color:red;">Please enter a valid name</span>
       </div>
       <div class="input-field">
-        <input placeholder="player-3" id="player_3" type="text" class="validate">
+        <input placeholder="player-3" title="Please enter only letters" pattern="[A-Za-z]+" id="player_3" type="text"
+          class="validate">
         <label for="player_3">player-3</label>
+        <span id="player_3_error" style="color:red;">Please enter a valid name</span>
       </div>
       <div class="input-field center">
-        <button class="btn-small">Add</button>
+        <button id="submitPlayersBtn" class="btn-small">Add</button>
+        <span id="errorMessageForPlayer" style="display: none; color: red;">Please enter only alphabets.</span>
+
       </div>
     </form>
   </div>
 
   
-  <script type="module" src="js/firebaseint.js?v=1"></script>
   <script type="module" src="js/authentication.js?v=1"></script>
-  <script src="js/app.js?v=1" defer></script>
-  <script type="module" src="js/db.js?v=1" defer></script>
-  <script src="js/ui.js?v=1"></script>
+  <script src="js/ui.js"></script>
 </body>
+
 </html>
