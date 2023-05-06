@@ -84,3 +84,9 @@ form .input-field{
 .container{
   padding-bottom: 7px;
 }
+
+#mvp{
+  font-size: 12px;
+  padding-left: 5px;
+  color: #EE642C;
+}
