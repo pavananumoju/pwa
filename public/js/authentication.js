@@ -15,7 +15,7 @@ loginform.addEventListener('submit', evt => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        window.open('/public/index.html', '_self');
+        window.open('/index.html', '_self');
         
         
         
