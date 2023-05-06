@@ -59,7 +59,6 @@ form.addEventListener('submit', evt => {
 // remove a recipe
 const recipeContainer = document.querySelector('.recipes');
 recipeContainer.addEventListener('click', evt => {
-  console.log(evt);
   if(evt.target.id === 'delete'){
     const id = evt.target.getAttribute('data-id');
     deleteDoc(doc(db, firestoreDBName, id));
