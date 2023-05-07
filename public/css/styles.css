@@ -84,3 +84,33 @@ form .input-field{
 .container{
   padding-bottom: 7px;
 }
+
+#mvp{
+  font-size: 12px;
+  padding-left: 5px;
+  color: #EE642C;
+}
+
+
+#loginForm .has-error .control-label,
+#loginForm .has-error .help-block,
+#loginForm .has-error .form-control-feedback {
+    color: #f39c12;
+}
+
+#loginForm .has-success .control-label,
+#loginForm .has-success .help-block,
+#loginForm .has-success .form-control-feedback {
+    color: #18bc9c;
+}
+
+.auth-msgs{
+  text-align: center;
+  color: red;
+}
+
+#loggedinuser{
+  text-align: center;
+  padding: 5px;
+  font-size: 15px;
+}

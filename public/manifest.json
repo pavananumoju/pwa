@@ -1,7 +1,7 @@
 {
   "name": "Cricbudz",
   "short_name": "Cricbudz",
-  "start_url": "/index.html",
+  "start_url": "/loginPage.html",
   "display": "standalone",
   "background_color": "#FFE9D2",
   "theme_color": "#FFE1C4",

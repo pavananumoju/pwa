@@ -65,7 +65,7 @@ const renderRecipe = (data, id) => {
             <span class="row recipe-title">
               <span class="col-sm">Player-1</span>
               <span class="col-sm"> : </span>
-              <span class="col-sm">${data.player_1}</span>
+              <span class="col-sm">${data.player_1}</span><i class="material-icons" id="mvp">grade</i>
             </span>
             <span class="row">
               <span class="col-sm">Player-2</span>
