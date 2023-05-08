@@ -91,6 +91,50 @@ const renderRecipe = (data, id) => {
 
 };
 
+
+const getDay = (date) => {
+  const str = date;
+  const [day, month, year] = str.split('-');
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayNumber = new Date(+year, month - 1, day);
+  let dayOfWeek = weekday[dayNumber.getDay()];
+  return dayOfWeek;
+}
+
+const renderHistory = () => {
+
+  // recipes.innerHTML = '';
+
+  const historyRecord = `3-5-2023, `+getDay('3-5-2023');
+
+  const html = `
+    <div class="card-panel recipe white row">
+      <div class="recipe-details">
+            <span class="recipe-title">
+              <span class="col-sm">`+historyRecord+`</span>
+            </span>
+      </div>
+    </div>
+    <div class="card-panel recipe white row">
+      <div class="recipe-details">
+            <span class="recipe-title">
+            <span class="col-sm">`+historyRecord+`</span>
+            </span>
+      </div>
+    </div>
+    <div class="card-panel recipe white row">
+      <div class="recipe-details">
+            <span class="recipe-title">
+            <span class="col-sm">`+historyRecord+`</span>
+            </span>
+      </div>
+    </div>
+
+  `;
+  recipes.innerHTML = html;
+
+};
+
 // remove recipe
 const removeRecipe = (id) => {
   const recipe = document.querySelector(`.recipe[data-id='${id}']`);

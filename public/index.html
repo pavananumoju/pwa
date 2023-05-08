@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" href="css/styles.css" rel="stylesheet">
   <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="module" src="js/firebaseint.js"></script>
+  <script type="module" src="js/firebaseint-dev.js"></script>
   <script src="js/app.js" defer></script>
-  <script type="module" src="js/db.js" defer></script>
+  
   <link rel="manifest" href="manifest.json">
   <!-- ios support -->
   <link rel="apple-touch-icon" href="img/icons/icon-96x96.png">
@@ -37,6 +37,7 @@
     <li><a class="subheader">Menu</a></li>
     <li><a href="index.html" class="waves-effect">Home</a></li>
     <li><a href="pages/rules.html" class="waves-effect">Rules</a></li>
+    <li><a href="#" class="waves-effect" onclick="renderHistory(); return false;">History</a></li>
     <li><a href="pages/about.html" class="waves-effect">About</a></li>
     <li>
       <div class="divider"></div>
@@ -94,6 +95,7 @@
   
   <script type="module" src="js/authentication.js?v=1"></script>
   <script src="js/ui.js"></script>
+  <script type="module" src="js/db.js" defer></script>
 </body>
 
 </html>

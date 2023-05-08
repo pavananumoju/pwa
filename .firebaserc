@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "contacts-db-2dcb5"
-  }
+    "default": "cric-dev-f8bd4",
+    "dev": "cric-dev-f8bd4"
+  },
+  "targets": {}
 }
