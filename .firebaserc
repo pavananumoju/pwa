@@ -1,7 +1,8 @@
 {
   "projects": {
-    "default": "cric-dev-f8bd4",
-    "dev": "cric-dev-f8bd4"
+    "default": "contacts-db-2dcb5",
+    "stg": "cricbudz-stg",
+    "dev": "cricbudz-dev"
   },
   "targets": {}
 }
