@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "contacts-db-2dcb5"
-  }
+    "default": "contacts-db-2dcb5",
+    "stg": "cricbudz-stg",
+    "dev": "cricbudz-dev"
+  },
+  "targets": {}
 }
