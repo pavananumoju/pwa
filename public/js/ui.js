@@ -96,3 +96,47 @@ const removeRecipe = (id) => {
   const recipe = document.querySelector(`.recipe[data-id='${id}']`);
   recipe.remove();
 };
+
+
+
+
+const getTeamData = (teamData) => {
+  recipes.innerHTML = '';
+    for (var i=1; i<teamData.length; i++) {
+      // console.log('squadType: '+teamData[i].squadType);
+      
+      html = `
+      <div class="card-panel team">
+        <div class="container team">
+            <pre>${doc.data().squadType}</pre>
+        </div>
+    </div>
+  `;
+  recipes.innerHTML += html;
+   }
+   document.querySelector('.add-btn').hide();
+}
+
+
+
+const getTeamDataFromSnapshot = (snapshot) => {
+  recipes.innerHTML = '';
+
+  snapshot.forEach((doc) => {
+    // console.log('squadType: '+doc.data().squadType);
+      
+      html = `
+    <div class="card-panel team">
+        <div class="container team">
+             <pre>${doc.data().squadType}</pre>
+        </div>
+    </div>
+  `;
+  recipes.innerHTML += html;
+   });
+
+   document.querySelector('.add-btn').hide();
+}
+
+
+

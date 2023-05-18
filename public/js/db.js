@@ -15,7 +15,7 @@ const db = getFirestore();
 //   });
 
 // real-time listener
-const q = query(collection(db, firestoreDBName));
+const q = query(collection(db, firestoreDBName, "Squads", "SRH"));
 const unsubscribe = onSnapshot(q, (snapshot) => {
     snapshot.docChanges().forEach(change => {
         if(change.type === 'added'){
@@ -67,3 +67,101 @@ recipeContainer.addEventListener('click', evt => {
     alert('Edit not yet implemented');
   }
 })
+
+
+const refreshData = document.querySelector('.refreshbtn');
+refreshData.addEventListener('click', evt => {
+  console.log('getting data using API method');
+  getData();
+  document.querySelector('.refreshbtn').disabled = true;
+  console.log('refresh button disabled');
+})
+
+
+const unlockAPICall = document.querySelector('.unlock');
+unlockAPICall.addEventListener('click', evt => {
+  document.querySelector('.refreshbtn').disabled = false;
+})
+
+
+
+const getData = () => {
+  console.log('getting data...');
+  
+
+  fetch('https://cricbuzz-cricket.p.rapidapi.com/series/v1/5945/squads/28579',
+  {
+    headers : { 
+      'X-RapidAPI-Key':'e3a774ef7cmshbdc22cb0186c6b8p16fdbbjsn6a99a1ad3518',
+      'X-RapidAPI-Host':'cricbuzz-cricket.p.rapidapi.com',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
+
+  }
+  )
+  .then(res => res.json())
+  .then(data=>{ 
+    // console.log(data); 
+    for (var i=0; i<data.player.length; i++) {
+      // console.log('name:['+i+']'+data.player[i].name);
+      if(data.player[i].id != undefined){
+        const playersSet = {
+          player_1: data.player[i].id,
+          player_2: data.player[i].name,
+          player_3: data.player[i].role
+        };
+          setDoc(doc(db, "IPL", "Squads", "SRH", data.player[i].id), playersSet);
+      }
+      
+   }
+   
+  })
+  
+}
+
+
+
+//////////
+// const teamsAPI = () => {
+const teams = document.getElementById('teams');
+teams.addEventListener('click', evt => {
+  // console.log('Display teams!...');
+  const querySnapshot = getDocs(collection(db, "Teams"))
+  .then(querySnapshot => {
+    // console.log('qs:'+querySnapshot);
+    getTeamDataFromSnapshot(querySnapshot);
+    return null;
+ })
+
+
+/*
+  fetch('https://cricbuzz-cricket.p.rapidapi.com/series/v1/5945/squads',
+  {
+    headers : { 
+      'X-RapidAPI-Key':'e3a774ef7cmshbdc22cb0186c6b8p16fdbbjsn6a99a1ad3518',
+      'X-RapidAPI-Host':'cricbuzz-cricket.p.rapidapi.com',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
+
+  }
+  )
+  .then(res => res.json())
+  .then(data=>{ 
+    console.log(data.squads); 
+    for (var i=1; i<data.squads.length; i++) {
+      console.log('squadType: '+data.squads[i].squadType);
+        const teamSet = {
+          squadId: data.squads[i].squadId,
+          teamId: data.squads[i].teamId,
+          squadType: data.squads[i].squadType
+        };
+      setDoc(doc(db, "Teams", data.squads[i].teamId.toString()), teamSet);
+   }
+    getTeamData(data.squads);
+  })
+*/
+
+});
+// }
